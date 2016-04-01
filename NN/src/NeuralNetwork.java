@@ -20,9 +20,10 @@ public class NeuralNetwork {
 
 	private DecimalFormat df = new DecimalFormat("#0.00000000#");
 
+	//Customize parameters
 	private final int max_Batch = 1000000;
-	private final double target_error = 0.1;
-	private final double learning_rate = 0.05;
+	private final double target_error = 0.02;
+	private final double learning_rate = 0.5;
 
 	public static void main(String[] args) {
 		int layer[] = { 2, 2, 1 }; // input, hidden, output
@@ -153,7 +154,6 @@ public class NeuralNetwork {
 			}
 		}
 
-		// update weights for the hidden layer
 		for (Node n : Hidden_Layer) {
 			ArrayList<Link> connections = n.get_Incoming_link();
 			for (Link con : connections) {
@@ -186,7 +186,7 @@ public class NeuralNetwork {
 			ArrayList<Link> connections = n.get_Incoming_link();
 			for (Link con : connections) {
 				System.out.println("Node" + con.get_Source_node().get_ID() + " - " + "Node"
-						+ con.get_Des_node().get_ID() + " Weight: " + df.format(con.get_Weight()));
+						+ con.get_Des_node().get_ID() + " : " + df.format(con.get_Weight()));
 			}
 		}
 		// Output layer
@@ -194,14 +194,15 @@ public class NeuralNetwork {
 			ArrayList<Link> connections = n.get_Incoming_link();
 			for (Link con : connections) {
 				System.out.println("Node" + con.get_Source_node().get_ID() + " - " + "Node"
-						+ con.get_Des_node().get_ID() + " Weight: " + df.format(con.get_Weight()));
+						+ con.get_Des_node().get_ID() + " : " + df.format(con.get_Weight()));
 			}
 		}
 		System.out.println();
 	}
 
 	void print_Result() {
-		System.out.println("Training result:");
+		System.out.println("--------------------Training result--------------------");
+		System.out.println("Learning rate = " + learning_rate + " ; Target error = " + target_error);
 		for (int training_instance = 0; training_instance < training_input.length; training_instance++) {
 			System.out.print("Train" + training_instance + ": ");
 			for (int node_idx = 0; node_idx < input_nodes; node_idx++) {
