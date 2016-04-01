@@ -25,14 +25,15 @@ public class NeuralNetwork {
 	private final double learning_rate = 0.05;
 
 	public static void main(String[] args) {
-		NeuralNetwork NN = new NeuralNetwork(2, 2, 1);
+		int layer[] = { 2, 2, 1 }; // input, hidden, output
+		NeuralNetwork NN = new NeuralNetwork(layer);
 		NN.Run();
 	}
 
-	public NeuralNetwork(int input, int hidden, int output) {
-		this.input_nodes = input;
-		this.hidden_nodes = hidden;
-		this.output_nodes = output;
+	public NeuralNetwork(int layer[]) {
+		this.input_nodes = layer[0];
+		this.hidden_nodes = layer[1];
+		this.output_nodes = layer[2];
 
 		// initialize nodes
 		Initial_nodes();
@@ -115,7 +116,7 @@ public class NeuralNetwork {
 			feed_Forward();
 
 			BP(target_output[training_instance]);
-			
+
 			training_output[training_instance] = output;
 			error += Math.pow(output - target_output[training_instance], 2);
 
@@ -128,6 +129,7 @@ public class NeuralNetwork {
 			Input_Layer.get(i).set_Output(inputs[i]);
 		}
 	}
+
 	public void feed_Forward() {
 		for (Node n : Hidden_Layer)
 			n.calculate_Output();
@@ -183,16 +185,16 @@ public class NeuralNetwork {
 		for (Node n : Hidden_Layer) {
 			ArrayList<Link> connections = n.get_Incoming_link();
 			for (Link con : connections) {
-				System.out.println("Node" + con.get_Source_node().get_ID() + " - " + "Node" + con.get_Des_node().get_ID() + " Weight: "
-						+ df.format(con.get_Weight()));
+				System.out.println("Node" + con.get_Source_node().get_ID() + " - " + "Node"
+						+ con.get_Des_node().get_ID() + " Weight: " + df.format(con.get_Weight()));
 			}
 		}
 		// Output layer
 		for (Node n : Output_Layer) {
 			ArrayList<Link> connections = n.get_Incoming_link();
 			for (Link con : connections) {
-				System.out.println("Node" + con.get_Source_node().get_ID() + " - " + "Node" + con.get_Des_node().get_ID() + " Weight: "
-						+ df.format(con.get_Weight()));
+				System.out.println("Node" + con.get_Source_node().get_ID() + " - " + "Node"
+						+ con.get_Des_node().get_ID() + " Weight: " + df.format(con.get_Weight()));
 			}
 		}
 		System.out.println();
