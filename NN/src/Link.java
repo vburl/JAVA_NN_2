@@ -1,42 +1,34 @@
 public class Link {
-    double weight = 0;
-    double prevDeltaWeight = 0; // for momentum
-    double deltaWeight = 0;
+    private double weight = 0;	//Link's weight
+    private final Node Source_node;	//Source node
+    private final Node Des_node;	//Destination node
+    private static int counter = 0;	//Used for ID counting
+    private final int ID;	//ID for link
  
-    final Node leftNeuron;
-    final Node rightNeuron;
-    static int counter = 0;
-    final public int id; // auto increment, starts at 0
- 
-    public Link(Node fromN, Node toN) {
-        leftNeuron = fromN;
-        rightNeuron = toN;
-        id = counter;
+    public Link(Node Source, Node Des) {
+        Source_node = Source;
+        Des_node = Des;
+        ID = counter;
         counter++;
     }
  
-    public double getWeight() {
+    public int get_ID(){
+    	return ID;
+    }
+    
+    public double get_Weight() {
         return weight;
     }
  
-    public void setWeight(double w) {
+    public void set_Weight(double w) {
         weight = w;
     }
  
-    public void setDeltaWeight(double w) {
-        prevDeltaWeight = deltaWeight;
-        deltaWeight = w;
+    public Node get_Source_node() {
+        return Source_node;
     }
  
-    public double getPrevDeltaWeight() {
-        return prevDeltaWeight;
-    }
- 
-    public Node get_Source() {
-        return leftNeuron;
-    }
- 
-    public Node get_Des() {
-        return rightNeuron;
+    public Node get_Des_node() {
+        return Des_node;
     }
 }
