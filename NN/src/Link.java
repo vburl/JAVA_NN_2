@@ -1,5 +1,5 @@
 public class Link {
-    private double weight = 0;	//Link's weight
+    private double weight = 0;	//Link's weight,
     private final Node Source_node;	//Source node
     private final Node Des_node;	//Destination node
     private static int counter = 0;	//Used for ID counting
